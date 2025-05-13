@@ -16,6 +16,4 @@ _start:
   mov ebx, 42
   sub ebx, 29
   mov ebx, 0
-  ;mul ebx ; eax *= ebx
-  ;div edx ; eax /= edx
   int 0x80
