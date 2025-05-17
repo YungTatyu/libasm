@@ -1,19 +1,17 @@
-global _start
-
-
 section .data
-  msg db "Hello, World!", 0x0a 
-  len equ $ - msg             ; 文字列の長さ
+str db 'hello', 0x0A, 0
 
 section .text
+global _start
+
 _start:
-  mov eax, 4; write syscall
-  mov ebx, 1 ; stdout
-  mov ecx, msg 
-  mov edx, len ; length
-  int 0x80 ; perform syscall
-  mov eax, 1
-  mov ebx, 42
-  sub ebx, 29
-  mov ebx, 0
-  int 0x80
+    mov rax, 1          ; syscall: write
+    mov rdi, 1          ; stdout
+    mov rsi, str        ; メッセージ
+    mov rdx, 6          ; バイト数（"hello\n"）
+    syscall
+
+    mov rax, 60         ; syscall: exit
+    xor rdi, rdi
+    syscall
+
